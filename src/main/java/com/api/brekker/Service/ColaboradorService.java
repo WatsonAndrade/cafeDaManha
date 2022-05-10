@@ -1,10 +1,12 @@
 package com.api.brekker.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.api.brekker.entities.Colaborador;
 import com.api.brekker.repository.ColaboradorRepository;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,5 +19,13 @@ public class ColaboradorService {
   public List<Colaborador> findAll() {
     List<Colaborador> colab = colaboradorRepository.findAll();
     return colab;
+  }
+
+  public boolean existsUserById(Long id){
+    return colaboradorRepository.existsById(id);
+  }
+
+  public Optional<Colaborador> findById(Long id){
+    return colaboradorRepository.findById(id);
   }
 }
