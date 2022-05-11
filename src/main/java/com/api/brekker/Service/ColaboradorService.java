@@ -6,7 +6,6 @@ import java.util.Optional;
 import com.api.brekker.entities.Colaborador;
 import com.api.brekker.repository.ColaboradorRepository;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,5 +26,14 @@ public class ColaboradorService {
 
   public Optional<Colaborador> findById(Long id){
     return colaboradorRepository.findById(id);
+  }
+
+  public boolean existsUserCpf(String cpf){
+    return colaboradorRepository.existsByCpf(cpf);
+  }
+
+  public Colaborador createUser(Colaborador colaboradorAccount){
+    Colaborador colaborador = colaboradorRepository.save(colaboradorAccount);
+    return colaborador;
   }
 }
