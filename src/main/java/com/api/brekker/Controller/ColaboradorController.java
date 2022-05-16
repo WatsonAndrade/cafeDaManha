@@ -9,9 +9,11 @@ import com.api.brekker.entities.Colaborador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.server.reactive.HttpHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,5 +45,13 @@ public class ColaboradorController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Cpf cadastrado no banco de dados");
         }
             return ResponseEntity.status(HttpStatus.CREATED).body(colaboradorService.createUser(colaborador));
+    }
+
+    @PutMapping("/user/{id}")
+    public ResponseEntity<Object> updateUser(@PathVariable Long id, @RequestBody @Valid Colaborador colaborador){
+        if(colaboradorService.existsByComida(colaborador.getComida())){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Comida ja solicita por outro Colaborador, por favor escolher outra opção!");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(colaboradorService.updateComida(id, colaborador));
     }
 }

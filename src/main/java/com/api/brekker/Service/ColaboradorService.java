@@ -3,6 +3,8 @@ package com.api.brekker.Service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import com.api.brekker.entities.Colaborador;
 import com.api.brekker.repository.ColaboradorRepository;
 
@@ -36,4 +38,14 @@ public class ColaboradorService {
     Colaborador colaborador = colaboradorRepository.save(colaboradorAccount);
     return colaborador;
   }
+
+  public boolean existsByComida(String comida){
+    return colaboradorRepository.existsByComida(comida);
+  }
+
+public Colaborador updateComida(Long id, @Valid Colaborador colaborador) {
+    colaborador.setId(id);
+    Colaborador comida = colaboradorRepository.save(colaborador);
+    return comida;
+}
 }
