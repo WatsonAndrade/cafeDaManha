@@ -48,4 +48,10 @@ public Colaborador updateComida(Long id, @Valid Colaborador colaborador) {
     Colaborador comida = colaboradorRepository.save(colaborador);
     return comida;
 }
+
+public void deleteColaborador(Long id){
+  Colaborador colaborador = new Colaborador();
+  colaborador.setId(id);
+  colaboradorRepository.deleteById(id);
+}
 }
